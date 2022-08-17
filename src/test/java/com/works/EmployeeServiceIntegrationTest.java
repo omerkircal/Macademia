@@ -83,8 +83,19 @@ public class EmployeeServiceIntegrationTest {
     public void testUpdateDepartmentOfficeLocation(){
         Employee employee=new Employee(1l,"firstName1","lastName1",123123123l,"officeLocation1","department1",new BigDecimal(123123),new Date(),false);
 
-        employeeService.updateDepartmentOfficeLocation(employee.getDepartment(),"İzmir");
+        employeeRepository.updateOfficeLocationByDepartment(employee.getDepartment(),"İzmir");
 
         assertTrue(employee.getOfficeLocation().equals("İzmir"));
     }
+
+    @Test
+    public void testGetWinner(){
+        Employee employee=new Employee(1l,"firstName1","lastName1",123123123l,"officeLocation1","department1",new BigDecimal(123123),new Date(),true);
+
+        employeeService.getWinner();
+
+        assertTrue(employee.getWinner()==true);
+    }
+
+
 }

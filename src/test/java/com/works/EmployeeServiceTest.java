@@ -75,7 +75,10 @@ import static org.mockito.Mockito.*;
 
     @Test
     void getWinner(){
+       Employee employee=new Employee(1l,"firstName1","lastName1",123123123l,"officeLocation1","department1",new BigDecimal(123123),new Date(),false);
+       when(employeeRepository.getWinner()).thenReturn(employee);
 
+       employeeService.getWinner();
     }
 
     @Test
