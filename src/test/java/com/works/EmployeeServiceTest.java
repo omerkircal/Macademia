@@ -5,9 +5,10 @@ import com.works.repositories.EmployeeRepository;
 import com.works.services.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.math.BigDecimal;
@@ -15,13 +16,16 @@ import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
  class EmployeeServiceTest {
+
+
+
+    @InjectMocks
+    private EmployeeService employeeService;
 
     @Mock
     private EmployeeRepository employeeRepository;
-
-    private EmployeeService employeeService;
 
     @BeforeEach
     void setUp(){
@@ -35,12 +39,14 @@ import static org.mockito.Mockito.*;
 
          employeeService.save(employee);
 
-         verify(employeeRepository,times(1)).save(employee);
     }
 
     @Test
     void update(){
+       Employee employee=new Employee(1l,"firstName1","lastName1",123123123l,"officeLocation1","department1",new BigDecimal(123123),new Date(),false);
+       lenient().when(employeeRepository.saveAndFlush(employee)).thenReturn(employee);
 
+       employeeService.update(employee);
     }
 
     @Test
